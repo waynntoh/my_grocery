@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MainScreen extends StatefulWidget {
+  final List<Order> orders;
+
+  MainScreen({this.orders});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -25,6 +29,13 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
+    if (widget.orders != null) {
+      setState(() {
+        orders = widget.orders;
+      });
+      print(orders[0].trackingNumber);
+    }
+
     order.initialize([
       CartItem(
         item: Item(

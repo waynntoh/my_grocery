@@ -2,6 +2,7 @@ import 'dart:html';
 import 'dart:ui';
 import 'package:cbd_grocery/cart.dart';
 import 'package:cbd_grocery/constants.dart';
+import 'package:cbd_grocery/main_screen.dart';
 import 'package:cbd_grocery/order.dart';
 import 'package:cbd_grocery/selector.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class _Form2ScreenState extends State<Form2Screen> {
   String deliveryTime = '7AM - 10AM';
   String paymentMethod = 'Cash On Delivery';
   String trackingNumber;
+  Order thisOrder;
 
   bool _copyToClipboardHack(String text) {
     final textarea = new TextAreaElement();
@@ -269,6 +271,10 @@ class _Form2ScreenState extends State<Form2Screen> {
                                           paymentMethod,
                                           trackingNumber);
 
+                                      setState(() {
+                                        thisOrder = newOrder;
+                                      });
+
                                       widget.addOrder(newOrder);
                                       showDialog(
                                         context: context,
@@ -307,10 +313,15 @@ class _Form2ScreenState extends State<Form2Screen> {
                                               onPressed: () {
                                                 _copyToClipboardHack(
                                                     trackingNumber);
-                                                Navigator.pop(context);
-                                                Navigator.pop(context);
-                                                Navigator.pop(context);
-                                                Navigator.pop(context);
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        MainScreen(
+                                                      orders: [thisOrder],
+                                                    ),
+                                                  ),
+                                                );
                                               },
                                               child: Icon(
                                                 Icons.content_copy,
