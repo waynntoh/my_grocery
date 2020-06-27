@@ -131,167 +131,169 @@ class _MainScreenState extends State<MainScreen> {
                   ],
                 ),
                 SizedBox(height: 18),
-                Container(
-                  width: double.infinity,
-                  height: 544,
-                  child: cart.length == 0
-                      ? Center(
-                          child: Text(
-                            'Your cart is empty',
-                            style: kDefaultTextStyle.copyWith(fontSize: 21),
-                          ),
-                        )
-                      : ListView.builder(
-                          itemCount: cart.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              width: 343,
-                              height: 80,
-                              margin: EdgeInsets.only(bottom: 16),
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Color(0xFFF3F3F3),
-                              ),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 96,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: Image.asset(
-                                        cart.cartItems[index].item.imagePath,
-                                        fit: BoxFit.cover,
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    child: cart.length == 0
+                        ? Center(
+                            child: Text(
+                              'Your cart is empty',
+                              style: kDefaultTextStyle.copyWith(fontSize: 21),
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: cart.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                width: 343,
+                                height: 80,
+                                margin: EdgeInsets.only(bottom: 16),
+                                padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Color(0xFFF3F3F3),
+                                ),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 96,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Image.asset(
+                                          cart.cartItems[index].item.imagePath,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(width: 12),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(children: [
-                                        Text(
-                                          '${cart.cartItems[index].item.name}',
-                                          style: kDefaultTextStyle.copyWith(
-                                            fontWeight: FontWeight.w900,
-                                          ),
-                                        ),
-                                      ]),
-                                      SizedBox(height: 4),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: <Widget>[
-                                              InkWell(
-                                                mouseCursor:
-                                                    MaterialStateMouseCursor
-                                                        .clickable,
-                                                child: Container(
-                                                  height: 28,
-                                                  width: 30,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(4),
-                                                      bottomLeft:
-                                                          Radius.circular(4),
-                                                    ),
-                                                    border: Border.all(
-                                                      color: kOrange4,
-                                                      width: 1.5,
-                                                    ),
-                                                  ),
-                                                  child: Center(
-                                                    child: Icon(
-                                                      Icons.remove,
-                                                      size: 18,
-                                                    ),
-                                                  ),
-                                                ),
-                                                onTap: () {
-                                                  setState(() {
-                                                    cart.cartItems[index]
-                                                        .decrement();
-                                                  });
-                                                },
-                                              ),
-                                              Container(
-                                                height: 28,
-                                                width: 30,
-                                                decoration: BoxDecoration(
-                                                  border: Border.symmetric(
-                                                    vertical: BorderSide(
-                                                      color: kOrange4,
-                                                      width: 1.5,
-                                                    ),
-                                                  ),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    '${cart.cartItems[index].count}',
-                                                    textAlign: TextAlign.center,
-                                                    style: kDefaultTextStyle,
-                                                  ),
-                                                ),
-                                              ),
-                                              InkWell(
-                                                mouseCursor:
-                                                    MaterialStateMouseCursor
-                                                        .clickable,
-                                                child: Container(
-                                                  height: 28,
-                                                  width: 30,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(4),
-                                                      bottomRight:
-                                                          Radius.circular(4),
-                                                    ),
-                                                    border: Border.all(
-                                                      color: kOrange4,
-                                                      width: 1.5,
-                                                    ),
-                                                  ),
-                                                  child: Center(
-                                                    child: Icon(
-                                                      Icons.add,
-                                                      size: 16,
-                                                    ),
-                                                  ),
-                                                ),
-                                                onTap: () {
-                                                  setState(() {
-                                                    cart.cartItems[index]
-                                                        .increment();
-                                                  });
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(width: 70),
+                                    SizedBox(width: 12),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(children: [
                                           Text(
-                                            'RM${(cart.cartItems[index].subtotal.toStringAsFixed(2))}',
+                                            '${cart.cartItems[index].item.name}',
                                             style: kDefaultTextStyle.copyWith(
                                               fontWeight: FontWeight.w900,
-                                              color: kOrange5,
                                             ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          }),
+                                          ),
+                                        ]),
+                                        SizedBox(height: 4),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: <Widget>[
+                                                InkWell(
+                                                  mouseCursor:
+                                                      MaterialStateMouseCursor
+                                                          .clickable,
+                                                  child: Container(
+                                                    height: 28,
+                                                    width: 30,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(4),
+                                                        bottomLeft:
+                                                            Radius.circular(4),
+                                                      ),
+                                                      border: Border.all(
+                                                        color: kOrange4,
+                                                        width: 1.5,
+                                                      ),
+                                                    ),
+                                                    child: Center(
+                                                      child: Icon(
+                                                        Icons.remove,
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  onTap: () {
+                                                    setState(() {
+                                                      cart.cartItems[index]
+                                                          .decrement();
+                                                    });
+                                                  },
+                                                ),
+                                                Container(
+                                                  height: 28,
+                                                  width: 30,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.symmetric(
+                                                      vertical: BorderSide(
+                                                        color: kOrange4,
+                                                        width: 1.5,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      '${cart.cartItems[index].count}',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: kDefaultTextStyle,
+                                                    ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                  mouseCursor:
+                                                      MaterialStateMouseCursor
+                                                          .clickable,
+                                                  child: Container(
+                                                    height: 28,
+                                                    width: 30,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topRight:
+                                                            Radius.circular(4),
+                                                        bottomRight:
+                                                            Radius.circular(4),
+                                                      ),
+                                                      border: Border.all(
+                                                        color: kOrange4,
+                                                        width: 1.5,
+                                                      ),
+                                                    ),
+                                                    child: Center(
+                                                      child: Icon(
+                                                        Icons.add,
+                                                        size: 16,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  onTap: () {
+                                                    setState(() {
+                                                      cart.cartItems[index]
+                                                          .increment();
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(width: 70),
+                                            Text(
+                                              'RM${(cart.cartItems[index].subtotal.toStringAsFixed(2))}',
+                                              style: kDefaultTextStyle.copyWith(
+                                                fontWeight: FontWeight.w900,
+                                                color: kOrange5,
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
+                  ),
                 ),
                 SizedBox(height: 12),
                 Container(

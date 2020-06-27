@@ -23,7 +23,6 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
 
   @override
   void initState() {
-    trackingNumberController.text = '#56652533583280604343788647881423';
     super.initState();
   }
 
